@@ -16,7 +16,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'The Spice Trail POS',
+  title: 'Tymo POS',
   description: 'Point of Sale System',
 }
 

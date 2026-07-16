@@ -1,10 +1,10 @@
 export const BUSINESS_INFO = {
-  name: 'The Spice Trail',
+  name: 'Tymo',
   tagline: 'Wood-Fired Kitchen & Table',
   shortDesc: 'Handmade dough, slow-cooked sauces, and a table always ready for you.',
   address: 'Shop #12, Main Boulevard, Gulberg III, Lahore',
   phone: '0300-1234567',
-  email: 'hello@thespicetrail.pk',
+  email: 'hello@tymo.site',
   footerMessage: 'Thank you for your order!',
   hours: [
     { day: 'Monday – Thursday', time: '12:00 PM – 11:00 PM' },
@@ -12,8 +12,8 @@ export const BUSINESS_INFO = {
     { day: 'Sunday', time: '1:00 PM – 11:00 PM' },
   ],
   social: {
-    instagram: '@thespicetrail.pk',
-    facebook: 'The Spice Trail',
+    instagram: '@tymo.site',
+    facebook: 'Tymo',
   },
 }
 

@@ -89,18 +89,18 @@ export default function WebOrdersPage() {
                 const next = nextStatus[o.status]
                 return (
                   <TableRow key={o.id}>
-                    <TableCell className="font-mono text-gray-500 text-xs">#{o.id}</TableCell>
-                    <TableCell className="text-gray-700">
-                      <div className="font-medium text-gray-900">{o.customerName}</div>
-                      <div className="text-xs text-gray-400">{o.customerPhone}</div>
+                    <TableCell className="font-mono text-text-muted text-xs">#{o.id}</TableCell>
+                    <TableCell className="text-text-secondary">
+                      <div className="font-medium text-text-primary">{o.customerName}</div>
+                      <div className="text-xs text-text-muted">{o.customerPhone}</div>
                     </TableCell>
-                    <TableCell className="text-gray-600 capitalize">{o.orderType.replace('_', '-')}</TableCell>
-                    <TableCell className="text-gray-500">{o.items.length}</TableCell>
-                    <TableCell className="font-semibold text-gray-800">{formatCurrency(Number(o.total))}</TableCell>
+                    <TableCell className="text-text-secondary capitalize">{o.orderType.replace('_', '-')}</TableCell>
+                    <TableCell className="text-text-muted">{o.items.length}</TableCell>
+                    <TableCell className="font-semibold text-text-primary">{formatCurrency(Number(o.total))}</TableCell>
                     <TableCell>
                       <Badge variant={statusBadge[o.status] ?? 'neutral'}>{o.status}</Badge>
                     </TableCell>
-                    <TableCell className="text-gray-500 text-xs">{formatDateTime(o.createdAt)}</TableCell>
+                    <TableCell className="text-text-muted text-xs">{formatDateTime(o.createdAt)}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-1.5">
                         {next && (

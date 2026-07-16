@@ -25,7 +25,7 @@ export function SearchInput({ value, onChange, placeholder = 'Search...', classN
             <button
               type="button"
               onClick={() => onChange('')}
-              className="flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+              className="flex items-center text-text-muted hover:text-text-primary transition-colors"
               aria-label="Clear search"
             >
               <X className="w-4 h-4" />

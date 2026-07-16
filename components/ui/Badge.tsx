@@ -14,17 +14,17 @@ type BadgeVariant =
   | 'purple'
 
 const variantStyles: Record<BadgeVariant, string> = {
-  pending:   'bg-yellow-100 text-yellow-700',
-  completed: 'bg-green-100 text-green-700',
-  cancelled: 'bg-red-100 text-red-600',
-  returned:  'bg-purple-100 text-purple-700',
-  active:    'bg-green-100 text-green-700',
-  inactive:  'bg-gray-100 text-gray-500',
-  low:       'bg-red-100 text-red-600',
-  ok:        'bg-green-100 text-green-700',
-  neutral:   'bg-blue-100 text-blue-700',
-  blue:      'bg-blue-100 text-blue-700',
-  purple:    'bg-purple-100 text-purple-700',
+  pending:   'bg-yellow-400/15 text-yellow-400',
+  completed: 'bg-green-400/15 text-green-400',
+  cancelled: 'bg-red-400/15 text-red-400',
+  returned:  'bg-purple-400/15 text-purple-300',
+  active:    'bg-green-400/15 text-green-400',
+  inactive:  'bg-surface-3 text-text-muted',
+  low:       'bg-red-400/15 text-red-400',
+  ok:        'bg-green-400/15 text-green-400',
+  neutral:   'bg-blue-400/15 text-blue-300',
+  blue:      'bg-blue-400/15 text-blue-300',
+  purple:    'bg-purple-400/15 text-purple-300',
 }
 
 interface BadgeProps {

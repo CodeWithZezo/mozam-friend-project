@@ -33,11 +33,11 @@ export function Modal({
   return (
     <Dialog.Root open={open} onOpenChange={(o) => !o && onClose()}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[2px] animate-fade-in" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-[2px] animate-fade-in" />
         <Dialog.Content
           className={cn(
             'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2',
-            'w-full p-6 bg-white rounded-2xl shadow-(--shadow-modal)',
+            'w-full p-6 bg-surface-1 border border-border-subtle rounded-2xl shadow-(--shadow-modal)',
             'animate-slide-up',
             'focus:outline-none',
             sizeClasses[size],
@@ -48,14 +48,14 @@ export function Modal({
           {(title || description) && (
             <div className="mb-5">
               {title && (
-                <Dialog.Title className="text-base font-semibold text-gray-900">
+                <Dialog.Title className="text-base font-semibold text-text-primary">
                   {title}
                 </Dialog.Title>
               )}
               {description && (
                 <Dialog.Description
                   id="modal-description"
-                  className="mt-1 text-sm text-gray-500"
+                  className="mt-1 text-sm text-text-secondary"
                 >
                   {description}
                 </Dialog.Description>
@@ -63,7 +63,7 @@ export function Modal({
             </div>
           )}
           <Dialog.Close
-            className="absolute top-4 right-4 p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+            className="absolute top-4 right-4 p-1.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-2 transition-colors"
             aria-label="Close"
           >
             <X className="w-4 h-4" />

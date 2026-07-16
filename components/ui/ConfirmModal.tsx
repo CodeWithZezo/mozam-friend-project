@@ -28,12 +28,12 @@ export function ConfirmModal({
   return (
     <Modal open={open} onClose={onClose} size="sm">
       <ModalBody className="items-center text-center">
-        <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center mx-auto">
-          <AlertTriangle className="w-6 h-6 text-red-500" />
+        <div className="w-12 h-12 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto">
+          <AlertTriangle className="w-6 h-6 text-red-400" />
         </div>
         <div>
-          <p className="text-base font-semibold text-gray-900">{title}</p>
-          <p className="mt-1 text-sm text-gray-500">{description}</p>
+          <p className="text-base font-semibold text-text-primary">{title}</p>
+          <p className="mt-1 text-sm text-text-secondary">{description}</p>
         </div>
       </ModalBody>
       <ModalFooter className="justify-center">

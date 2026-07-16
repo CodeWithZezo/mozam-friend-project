@@ -9,7 +9,7 @@ export function Table({ children, className }: TableProps) {
   return (
     <div
       className={cn(
-        'bg-white rounded-xl border border-gray-100 overflow-hidden',
+        'bg-surface-1 rounded-xl border border-border-subtle overflow-hidden',
         'shadow-(--shadow-card)',
         className
       )}
@@ -26,7 +26,7 @@ interface TableHeadProps {
   className?: string
 }
 export function TableHead({ children, className }: TableHeadProps) {
-  return <thead className={cn('bg-gray-50 border-b border-gray-100', className)}>{children}</thead>
+  return <thead className={cn('bg-surface-2 border-b border-border-subtle', className)}>{children}</thead>
 }
 
 interface TableHeaderProps {
@@ -37,7 +37,7 @@ export function TableHeader({ children, className }: TableHeaderProps) {
   return (
     <th
       className={cn(
-        'px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap',
+        'px-4 py-3 text-left text-xs font-semibold text-text-muted uppercase tracking-wider whitespace-nowrap',
         className
       )}
     >
@@ -51,7 +51,7 @@ interface TableBodyProps {
   className?: string
 }
 export function TableBody({ children, className }: TableBodyProps) {
-  return <tbody className={cn('divide-y divide-gray-50', className)}>{children}</tbody>
+  return <tbody className={cn('divide-y divide-border-subtle', className)}>{children}</tbody>
 }
 
 interface TableRowProps {
@@ -65,7 +65,7 @@ export function TableRow({ children, className, onClick }: TableRowProps) {
       onClick={onClick}
       className={cn(
         'transition-colors duration-100',
-        onClick ? 'cursor-pointer hover:bg-gray-50' : 'hover:bg-gray-50/60',
+        onClick ? 'cursor-pointer hover:bg-surface-2' : 'hover:bg-surface-2/60',
         className
       )}
     >
@@ -83,7 +83,7 @@ export function TableCell({ children, className, colSpan }: TableCellProps) {
   return (
     <td
       colSpan={colSpan}
-      className={cn('px-4 py-3 text-gray-700 whitespace-nowrap', className)}
+      className={cn('px-4 py-3 text-text-secondary whitespace-nowrap', className)}
     >
       {children}
     </td>

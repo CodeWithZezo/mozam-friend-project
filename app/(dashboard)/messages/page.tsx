@@ -46,10 +46,10 @@ export default function MessagesPage() {
             <TableBody>
               {messages.map(m => (
                 <TableRow key={m.id}>
-                  <TableCell className="font-medium text-gray-900">{m.name}</TableCell>
-                  <TableCell className="text-gray-600">{m.email}</TableCell>
-                  <TableCell className="text-gray-600 max-w-md">{m.message}</TableCell>
-                  <TableCell className="text-gray-500 text-xs">{formatDateTime(m.createdAt)}</TableCell>
+                  <TableCell className="font-medium text-text-primary">{m.name}</TableCell>
+                  <TableCell className="text-text-secondary">{m.email}</TableCell>
+                  <TableCell className="text-text-secondary max-w-md">{m.message}</TableCell>
+                  <TableCell className="text-text-muted text-xs">{formatDateTime(m.createdAt)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

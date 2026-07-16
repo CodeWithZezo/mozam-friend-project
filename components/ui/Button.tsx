@@ -5,20 +5,20 @@ import { cn } from '@/lib/utils'
 import { forwardRef } from 'react'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-spice-500 focus-visible:ring-offset-2 select-none',
+  'inline-flex items-center justify-center gap-2 font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-spice-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 select-none',
   {
     variants: {
       variant: {
         primary:
-          'bg-spice-500 text-white hover:bg-spice-600 active:bg-spice-700 shadow-sm',
+          'bg-spice-400 text-surface-0 hover:bg-spice-300 active:bg-spice-200 shadow-sm',
         secondary:
-          'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 active:bg-gray-100 shadow-sm',
+          'bg-surface-2 text-text-primary border border-border-strong hover:bg-surface-3 active:bg-surface-3/80 shadow-sm',
         destructive:
           'bg-red-500 text-white hover:bg-red-600 active:bg-red-700 shadow-sm',
         ghost:
-          'text-gray-600 hover:bg-gray-100 hover:text-gray-900 active:bg-gray-200',
+          'text-text-secondary hover:bg-surface-2 hover:text-text-primary active:bg-surface-3',
         link:
-          'text-spice-500 hover:text-spice-600 underline-offset-4 hover:underline p-0 h-auto',
+          'text-spice-400 hover:text-spice-300 underline-offset-4 hover:underline p-0 h-auto',
       },
       size: {
         sm: 'h-7 px-3 text-xs rounded-md',

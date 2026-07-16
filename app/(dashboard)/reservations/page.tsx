@@ -71,15 +71,15 @@ export default function ReservationsPage() {
             <TableBody>
               {reservations.map(r => (
                 <TableRow key={r.id}>
-                  <TableCell className="font-medium text-gray-900">{r.name}</TableCell>
-                  <TableCell className="text-gray-600">
+                  <TableCell className="font-medium text-text-primary">{r.name}</TableCell>
+                  <TableCell className="text-text-secondary">
                     <div>{r.phone}</div>
-                    <div className="text-xs text-gray-400">{r.email}</div>
+                    <div className="text-xs text-text-muted">{r.email}</div>
                   </TableCell>
-                  <TableCell className="text-gray-600">
+                  <TableCell className="text-text-secondary">
                     {formatDate(r.date)} &middot; {r.time}
                   </TableCell>
-                  <TableCell className="text-gray-500">{r.guests}</TableCell>
+                  <TableCell className="text-text-muted">{r.guests}</TableCell>
                   <TableCell>
                     <Badge variant={statusBadge[r.status] ?? 'neutral'}>{r.status}</Badge>
                   </TableCell>

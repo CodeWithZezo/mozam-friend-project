@@ -37,29 +37,29 @@ export default async function DashboardPage() {
       label: 'Total Orders',
       value: totalOrders,
       icon: ShoppingCart,
-      iconColor: 'text-blue-500',
-      iconBg: 'from-blue-50 to-blue-100',
+      iconColor: 'text-blue-400',
+      iconBg: 'from-blue-500/10 to-blue-500/20',
     },
     {
       label: 'Total Revenue',
       value: formatCurrency(revenueTotal),
       icon: TrendingUp,
-      iconColor: 'text-green-500',
-      iconBg: 'from-green-50 to-green-100',
+      iconColor: 'text-green-400',
+      iconBg: 'from-green-500/10 to-green-500/20',
     },
     {
       label: 'Customers',
       value: totalCustomers,
       icon: Users,
-      iconColor: 'text-purple-500',
-      iconBg: 'from-purple-50 to-purple-100',
+      iconColor: 'text-purple-400',
+      iconBg: 'from-purple-500/10 to-purple-500/20',
     },
     {
       label: 'Active Products',
       value: totalProducts,
       icon: Package,
-      iconColor: 'text-spice-500',
-      iconBg: 'from-spice-50 to-spice-100',
+      iconColor: 'text-spice-400',
+      iconBg: 'from-spice-500/10 to-spice-500/20',
     },
   ]
 
@@ -73,15 +73,15 @@ export default async function DashboardPage() {
           {cards.map(({ label, value, icon: Icon, iconColor, iconBg }) => (
             <div
               key={label}
-              className="bg-white rounded-xl p-5 border border-gray-100 shadow-(--shadow-card) hover:shadow-(--shadow-card-hover) hover:-translate-y-0.5 transition-all duration-200 cursor-default"
+              className="bg-surface-1 rounded-xl p-5 border border-border-subtle shadow-(--shadow-card) hover:shadow-(--shadow-card-hover) hover:-translate-y-0.5 transition-all duration-200 cursor-default"
             >
               <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</span>
+                <span className="text-xs font-medium text-text-muted uppercase tracking-wider">{label}</span>
                 <div className={`w-9 h-9 bg-linear-to-br ${iconBg} rounded-xl flex items-center justify-center`}>
                   <Icon size={17} className={iconColor} />
                 </div>
               </div>
-              <div className="text-2xl font-bold text-gray-900 tracking-tight">{value}</div>
+              <div className="text-2xl font-bold text-text-primary tracking-tight">{value}</div>
             </div>
           ))}
         </div>
@@ -89,17 +89,17 @@ export default async function DashboardPage() {
         {/* Quick actions */}
         <div className="flex flex-wrap gap-3">
           <Link href="/orders/new">
-            <span className="inline-flex items-center gap-2 bg-spice-500 hover:bg-spice-600 active:bg-spice-700 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors duration-150 shadow-sm">
+            <span className="inline-flex items-center gap-2 bg-spice-400 hover:bg-spice-300 active:bg-spice-200 text-surface-0 text-sm font-medium px-4 py-2.5 rounded-xl transition-colors duration-150 shadow-sm">
               <Plus size={15} /> New Order
             </span>
           </Link>
           <Link href="/products">
-            <span className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 active:bg-gray-100 text-gray-700 text-sm font-medium px-4 py-2.5 rounded-xl border border-gray-300 transition-colors duration-150 shadow-sm">
+            <span className="inline-flex items-center gap-2 bg-surface-2 hover:bg-surface-3 active:bg-surface-3/80 text-text-primary text-sm font-medium px-4 py-2.5 rounded-xl border border-border-strong transition-colors duration-150 shadow-sm">
               <Package size={15} /> Add Product
             </span>
           </Link>
           <Link href="/customers">
-            <span className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 active:bg-gray-100 text-gray-700 text-sm font-medium px-4 py-2.5 rounded-xl border border-gray-300 transition-colors duration-150 shadow-sm">
+            <span className="inline-flex items-center gap-2 bg-surface-2 hover:bg-surface-3 active:bg-surface-3/80 text-text-primary text-sm font-medium px-4 py-2.5 rounded-xl border border-border-strong transition-colors duration-150 shadow-sm">
               <Users size={15} /> Add Customer
             </span>
           </Link>
@@ -108,10 +108,10 @@ export default async function DashboardPage() {
         {/* Recent Orders */}
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-semibold text-gray-900">Recent Orders</h3>
+            <h3 className="text-sm font-semibold text-text-primary">Recent Orders</h3>
             <Link
               href="/orders"
-              className="flex items-center gap-1 text-sm text-spice-500 hover:text-spice-600 font-medium transition-colors"
+              className="flex items-center gap-1 text-sm text-spice-400 hover:text-spice-300 font-medium transition-colors"
             >
               View all <ArrowRight size={14} />
             </Link>
@@ -137,7 +137,7 @@ export default async function DashboardPage() {
                 description="Create your first order to get started."
                 action={
                   <Link href="/orders/new">
-                    <span className="inline-flex items-center gap-1.5 text-sm text-spice-500 hover:text-spice-600 font-medium">
+                    <span className="inline-flex items-center gap-1.5 text-sm text-spice-400 hover:text-spice-300 font-medium">
                       <Plus size={14} /> New Order
                     </span>
                   </Link>
@@ -147,20 +147,20 @@ export default async function DashboardPage() {
               <TableBody>
                 {recentOrders.map(order => (
                   <TableRow key={order.id}>
-                    <TableCell className="font-mono text-gray-500 text-xs">#{order.id}</TableCell>
-                    <TableCell className="text-gray-700">
-                      {order.customer?.name ?? <span className="text-gray-400 italic">Walk-in</span>}
+                    <TableCell className="font-mono text-text-muted text-xs">#{order.id}</TableCell>
+                    <TableCell className="text-text-secondary">
+                      {order.customer?.name ?? <span className="text-text-muted italic">Walk-in</span>}
                     </TableCell>
-                    <TableCell className="text-gray-600 capitalize">
+                    <TableCell className="text-text-secondary capitalize">
                       {order.orderType.replace('_', '-')}
                     </TableCell>
-                    <TableCell className="font-semibold text-gray-900">
+                    <TableCell className="font-semibold text-text-primary">
                       {formatCurrency(Number(order.total))}
                     </TableCell>
                     <TableCell>
                       <Badge variant={statusBadge[order.status] ?? 'neutral'}>{order.status}</Badge>
                     </TableCell>
-                    <TableCell className="text-gray-500 text-xs">
+                    <TableCell className="text-text-muted text-xs">
                       {formatDate(new Date(order.createdAt))}
                     </TableCell>
                   </TableRow>

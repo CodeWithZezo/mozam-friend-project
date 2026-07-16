@@ -38,7 +38,7 @@ export default function LoginPage() {
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 bg-linear-to-br from-spice-400 to-spice-600 shadow-sm">
             <UtensilsCrossed size={28} className="text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">The Spice Trail POS</h1>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Tymo POS</h1>
           <p className="text-gray-500 text-sm mt-1">Sign in to your account</p>
         </div>
 

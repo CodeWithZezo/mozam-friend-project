@@ -1,9 +1,21 @@
 @import "tailwindcss";
 
 /* ─── Design Tokens ─────────────────────────────────────────────────── */
+/* Dashboard is dark-mode only. The .site-theme (public restaurant site) keeps its own light palette below. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0b;
+  --foreground: #ededed;
+
+  /* Dashboard surface scale (neutral charcoal) */
+  --surface-0: #0a0a0b;
+  --surface-1: #141416;
+  --surface-2: #1c1c1f;
+  --surface-3: #26262a;
+  --border-subtle: #27272a;
+  --border-strong: #3a3a3f;
+  --text-primary: #ededed;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
 
   /* Radius scale */
   --radius-xs: 4px;
@@ -14,23 +26,16 @@
   --radius-2xl: 20px;
   --radius-full: 9999px;
 
-  /* Elevation */
-  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
-  --shadow-card-hover: 0 4px 12px 0 rgb(0 0 0 / 0.08), 0 2px 4px -1px rgb(0 0 0 / 0.06);
-  --shadow-modal: 0 20px 60px -10px rgb(0 0 0 / 0.22), 0 8px 24px -4px rgb(0 0 0 / 0.12);
-  --shadow-dropdown: 0 4px 16px 0 rgb(0 0 0 / 0.1), 0 2px 6px -2px rgb(0 0 0 / 0.08);
+  /* Elevation (dark-mode shadows are subtler, rely more on borders) */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.2);
+  --shadow-card-hover: 0 4px 16px 0 rgb(0 0 0 / 0.4), 0 2px 6px -1px rgb(0 0 0 / 0.3);
+  --shadow-modal: 0 20px 60px -10px rgb(0 0 0 / 0.6), 0 8px 24px -4px rgb(0 0 0 / 0.4);
+  --shadow-dropdown: 0 4px 16px 0 rgb(0 0 0 / 0.4), 0 2px 6px -2px rgb(0 0 0 / 0.3);
 
-  /* Brand */
-  --color-brand: #9c3245;
-  --color-brand-hover: #7a2331;
-  --color-brand-light: #fdf8f0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Brand (global default — dashboard uses amber; .site-theme overrides back to maroon below) */
+  --color-brand: #d69432;
+  --color-brand-hover: #e8b566;
+  --color-brand-light: #2b1a14;
 }
 
 /* ─── Restaurant Site Theme (scoped, does not affect the POS dashboard) ── */
@@ -46,6 +51,13 @@
   --site-ink: #2b1a14;
   --site-olive: #5c6b3f;
   --font-display: var(--font-playfair), Georgia, serif;
+
+  /* Restore the site's original maroon focus-ring brand color — the dashboard's
+     dark-mode redesign repoints the global --color-brand to amber, but the
+     public site is unaffected and keeps its original look. */
+  --color-brand: var(--site-maroon-light);
+  --color-brand-hover: var(--site-maroon);
+  --color-brand-light: var(--site-cream);
 
   background: var(--site-cream);
   color: var(--site-ink);
@@ -73,7 +85,20 @@
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, monospace;
 
-  /* Dashboard brand scale — maroon/amber, matches the public site's .site-theme palette */
+  /* Dashboard surface scale (neutral charcoal, dark-mode only) */
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  /* Dashboard brand scale — maroon/amber, matches the public site's .site-theme palette.
+     Scale direction unchanged (50=lightest, 900=darkest); dark-mode components pick
+     lighter shades (400/300) for accents instead of the 500/600 used in light mode. */
   --color-spice-50: #fdf8f0;
   --color-spice-100: #f6ecd9;
   --color-spice-200: #f0c375;
@@ -147,9 +172,9 @@
 .skeleton-shimmer {
   background: linear-gradient(
     90deg,
-    #f0f0f0 25%,
-    #e8e8e8 50%,
-    #f0f0f0 75%
+    #1c1c1f 25%,
+    #26262a 50%,
+    #1c1c1f 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;

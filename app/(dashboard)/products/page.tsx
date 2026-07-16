@@ -22,7 +22,7 @@ type QRVariant = { id: number; name: string; price: number; productName: string;
 
 const DEFAULT_VARIANT: FormVariant = { name: 'Regular', price: '', stock: '100', lowStockThreshold: '20' }
 const EMPTY_VARIANT: FormVariant = { name: '', price: '', stock: '100', lowStockThreshold: '20' }
-const INP = 'border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-spice-400/20 focus:border-spice-400 transition-colors bg-white'
+const INP = 'border border-border-strong rounded-lg px-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-spice-400/20 focus:border-spice-400 transition-colors bg-surface-2'
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
@@ -127,7 +127,7 @@ export default function ProductsPage() {
     <button
       type="button"
       onClick={() => setAdjustAction(value)}
-      className={`flex-1 py-1.5 text-sm font-medium rounded-md transition-colors ${adjustAction === value ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
+      className={`flex-1 py-1.5 text-sm font-medium rounded-md transition-colors ${adjustAction === value ? 'bg-surface-3 shadow text-text-primary' : 'text-text-muted hover:text-text-secondary'}`}
     >
       {label}
     </button>
@@ -139,9 +139,9 @@ export default function ProductsPage() {
       <div className="p-6">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-3">
-            <p className="text-sm text-gray-500">{products.length} {products.length === 1 ? 'product' : 'products'}</p>
+            <p className="text-sm text-text-muted">{products.length} {products.length === 1 ? 'product' : 'products'}</p>
             {lowStockVariantCount > 0 && (
-              <span className="flex items-center gap-1 text-xs bg-red-100 text-red-600 px-2.5 py-1 rounded-full font-medium">
+              <span className="flex items-center gap-1 text-xs bg-red-400/15 text-red-400 px-2.5 py-1 rounded-full font-medium">
                 <AlertTriangle size={11} /> {lowStockVariantCount} low stock variants
               </span>
             )}
@@ -177,27 +177,27 @@ export default function ProductsPage() {
             <TableBody>
               {products.map(p => (
                 <TableRow key={p.id}>
-                  <TableCell className="font-medium text-gray-900">{p.name}</TableCell>
-                  <TableCell className="text-gray-600">{p.category.name}</TableCell>
-                  <TableCell className="text-gray-700">{formatCurrency(Number(p.basePrice))}</TableCell>
+                  <TableCell className="font-medium text-text-primary">{p.name}</TableCell>
+                  <TableCell className="text-text-secondary">{p.category.name}</TableCell>
+                  <TableCell className="text-text-secondary">{formatCurrency(Number(p.basePrice))}</TableCell>
                   <TableCell>
                     <div className="flex flex-col gap-1">
                       {p.variants.map((v, i) => {
                         const isLow = v.stock <= v.lowStockThreshold
                         return (
                           <div key={v.id ?? i} className="flex items-center gap-1.5 text-xs">
-                            <span className="text-gray-500">{v.name} ·</span>
+                            <span className="text-text-muted">{v.name} ·</span>
                             {isLow ? (
                               <Badge variant="low">
                                 <AlertTriangle size={10} className="mr-1" />{v.stock} in stock
                               </Badge>
                             ) : (
-                              <span className="text-gray-600">{v.stock} in stock</span>
+                              <span className="text-text-secondary">{v.stock} in stock</span>
                             )}
                             <Button
                               size="sm" variant="ghost"
                               onClick={() => openAdjust(v.id!, v.name, p.name)}
-                              className="text-blue-600 hover:bg-blue-50 h-5 px-1.5 text-xs"
+                              className="text-blue-400 hover:bg-blue-400/15 h-5 px-1.5 text-xs"
                             >
                               Adjust
                             </Button>
@@ -205,7 +205,7 @@ export default function ProductsPage() {
                               size="sm" variant="ghost" icon
                               aria-label="Show QR code"
                               onClick={() => setQrVariant({ id: v.id!, name: v.name, price: Number(v.price), productName: p.name, categoryName: p.category.name })}
-                              className="text-gray-500 hover:text-gray-700 h-5 w-5"
+                              className="text-text-muted hover:text-text-secondary h-5 w-5"
                             >
                               <QrCode size={12} />
                             </Button>
@@ -223,7 +223,7 @@ export default function ProductsPage() {
                         variant="ghost" size="sm" icon
                         aria-label={`Edit ${p.name}`}
                         onClick={() => openEdit(p)}
-                        className="text-blue-500 hover:text-blue-700 hover:bg-blue-50"
+                        className="text-blue-400 hover:text-blue-300 hover:bg-blue-400/15"
                       >
                         <Pencil size={14} />
                       </Button>
@@ -231,7 +231,7 @@ export default function ProductsPage() {
                         variant="ghost" size="sm" icon
                         aria-label={`Delete ${p.name}`}
                         onClick={() => setDeleteTarget(p)}
-                        className="text-red-400 hover:text-red-600 hover:bg-red-50"
+                        className="text-red-400 hover:text-red-300 hover:bg-red-400/15"
                       >
                         <Trash2 size={14} />
                       </Button>
@@ -265,16 +265,16 @@ export default function ProductsPage() {
             </div>
             <div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-gray-700">Category</label>
+                <label className="text-sm font-medium text-text-secondary">Category</label>
                 <select
                   value={form.categoryId}
                   onChange={e => { setForm({ ...form, categoryId: e.target.value }); setErrors(p => ({ ...p, categoryId: '' })) }}
-                  className={`w-full border rounded-lg px-3 py-2 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0 ${form.categoryId ? 'text-gray-900' : 'text-gray-400'} ${errors.categoryId ? 'border-red-400 focus:ring-red-400/20' : 'border-gray-300 focus:border-spice-400 focus:ring-spice-400/20'}`}
+                  className={`w-full border rounded-lg px-3 py-2 text-sm bg-surface-2 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-0 ${form.categoryId ? 'text-text-primary' : 'text-text-muted'} ${errors.categoryId ? 'border-red-400 focus:ring-red-400/20' : 'border-border-strong focus:border-spice-400 focus:ring-spice-400/20'}`}
                 >
                   <option value="">Select category...</option>
                   {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                 </select>
-                {errors.categoryId && <p className="text-xs text-red-500">{errors.categoryId}</p>}
+                {errors.categoryId && <p className="text-xs text-red-400">{errors.categoryId}</p>}
               </div>
             </div>
             <div>
@@ -289,23 +289,23 @@ export default function ProductsPage() {
             </div>
             <div className="col-span-2">
               <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-gray-700">Description <span className="text-gray-400 font-normal">(optional)</span></label>
+                <label className="text-sm font-medium text-text-secondary">Description <span className="text-text-muted font-normal">(optional)</span></label>
                 <textarea
                   value={form.description}
                   onChange={e => setForm({ ...form, description: e.target.value })}
                   rows={2}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-spice-400/20 focus:border-spice-400 transition-colors resize-none"
+                  className="w-full border border-border-strong bg-surface-2 rounded-lg px-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-spice-400/20 focus:border-spice-400 transition-colors resize-none"
                 />
               </div>
             </div>
             {editing && (
               <div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-medium text-gray-700">Status</label>
+                  <label className="text-sm font-medium text-text-secondary">Status</label>
                   <select
                     value={form.status}
                     onChange={e => setForm({ ...form, status: e.target.value })}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-spice-400/20 focus:border-spice-400 transition-colors"
+                    className="w-full border border-border-strong bg-surface-2 rounded-lg px-3 py-2 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-spice-400/20 focus:border-spice-400 transition-colors"
                   >
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
@@ -318,22 +318,22 @@ export default function ProductsPage() {
           {/* Variants */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-sm font-medium text-gray-700">Variants</label>
+              <label className="text-sm font-medium text-text-secondary">Variants</label>
               <Button
                 variant="ghost" size="sm"
                 onClick={() => setVariants([...variants, EMPTY_VARIANT])}
-                className="text-spice-500 hover:text-spice-600 hover:bg-spice-50"
+                className="text-spice-400 hover:text-spice-300 hover:bg-spice-400/15"
               >
                 <Plus size={13} /> Add Variant
               </Button>
             </div>
-            <div className="bg-gray-50 rounded-xl p-3 space-y-2">
+            <div className="bg-surface-2 rounded-xl p-3 space-y-2">
               {/* Column labels */}
               <div className="flex gap-2 items-center px-1">
-                <span className="w-36 text-xs text-gray-400">Name</span>
-                <span className="w-24 text-xs text-gray-400">Price</span>
-                <span className="w-20 text-xs text-gray-400">Stock</span>
-                <span className="w-20 text-xs text-gray-400">Low at</span>
+                <span className="w-36 text-xs text-text-muted">Name</span>
+                <span className="w-24 text-xs text-text-muted">Price</span>
+                <span className="w-20 text-xs text-text-muted">Stock</span>
+                <span className="w-20 text-xs text-text-muted">Low at</span>
               </div>
               {variants.map((v, i) => {
                 const upd = (field: keyof FormVariant, val: string) => { const nv = [...variants]; nv[i] = { ...nv[i], [field]: val }; setVariants(nv) }
@@ -371,7 +371,7 @@ export default function ProductsPage() {
                         variant="ghost" size="sm" icon
                         aria-label="Remove variant"
                         onClick={() => setVariants(variants.filter((_, j) => j !== i))}
-                        className="text-red-400 hover:text-red-600 hover:bg-red-50 shrink-0"
+                        className="text-red-400 hover:text-red-300 hover:bg-red-400/15 shrink-0"
                       >
                         <X size={14} />
                       </Button>
@@ -400,7 +400,7 @@ export default function ProductsPage() {
         size="sm"
       >
         <ModalBody className="space-y-4">
-          <div className="flex bg-gray-100 rounded-lg p-1 gap-1">
+          <div className="flex bg-surface-2 rounded-lg p-1 gap-1">
             {segBtn('Add', 'add')}
             {segBtn('Use', 'use')}
             {segBtn('Set', 'set')}

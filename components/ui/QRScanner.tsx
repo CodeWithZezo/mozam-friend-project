@@ -12,8 +12,8 @@ interface Props {
   onScan: (variantId: number) => void
 }
 
-const ELEMENT_ID = 'alfredough-qr-reader'
-const QR_PATTERN = /^alfredough:v:(\d+)$/
+const ELEMENT_ID = 'tymo-qr-reader'
+const QR_PATTERN = /^tymo:v:(\d+)$/
 
 export default function QRScanner({ open, onClose, onScan }: Props) {
   const scannerRef = useRef<InstanceType<typeof import('html5-qrcode')['Html5Qrcode']> | null>(null)
@@ -98,28 +98,28 @@ export default function QRScanner({ open, onClose, onScan }: Props) {
       <ModalBody>
         {state === 'denied' ? (
           <div className="flex flex-col items-center gap-3 py-8 text-center">
-            <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center">
-              <AlertTriangle size={22} className="text-red-500" />
+            <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center">
+              <AlertTriangle size={22} className="text-red-400" />
             </div>
-            <p className="text-sm font-medium text-gray-800">Camera access denied</p>
-            <p className="text-xs text-gray-500">Enable camera permission in your browser settings and try again.</p>
+            <p className="text-sm font-medium text-text-primary">Camera access denied</p>
+            <p className="text-xs text-text-secondary">Enable camera permission in your browser settings and try again.</p>
           </div>
         ) : state === 'error' ? (
           <div className="flex flex-col items-center gap-3 py-8 text-center">
-            <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
-              <Camera size={22} className="text-gray-400" />
+            <div className="w-12 h-12 rounded-full bg-surface-2 flex items-center justify-center">
+              <Camera size={22} className="text-text-muted" />
             </div>
-            <p className="text-sm font-medium text-gray-800">Camera unavailable</p>
-            <p className="text-xs text-gray-500">Could not access the camera. Make sure it is connected and not in use.</p>
+            <p className="text-sm font-medium text-text-primary">Camera unavailable</p>
+            <p className="text-xs text-text-secondary">Could not access the camera. Make sure it is connected and not in use.</p>
           </div>
         ) : (
           <div className="flex flex-col items-center gap-3">
             <div
               id={ELEMENT_ID}
-              className="w-full rounded-xl border border-gray-200 overflow-hidden"
+              className="w-full rounded-xl border border-border-subtle overflow-hidden"
               style={{ height: 320 }}
             />
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-text-muted">
               {state === 'starting' ? 'Starting camera…' : 'Scanning…'}
             </p>
           </div>

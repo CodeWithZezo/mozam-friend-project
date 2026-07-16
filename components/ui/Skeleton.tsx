@@ -22,7 +22,7 @@ export function TableRowSkeleton({ rows = 5, cols = 4 }: TableRowSkeletonProps) 
   return (
     <tbody role="status" aria-label="Loading">
       {Array.from({ length: rows }).map((_, i) => (
-        <tr key={i} className="border-b border-gray-50">
+        <tr key={i} className="border-b border-border-subtle">
           {Array.from({ length: cols }).map((_, j) => (
             <td key={j} className="px-4 py-3">
               <Skeleton
@@ -41,7 +41,7 @@ export function TableRowSkeleton({ rows = 5, cols = 4 }: TableRowSkeletonProps) 
 
 export function CardSkeleton({ className }: SkeletonProps) {
   return (
-    <div className={cn('bg-white rounded-xl border border-gray-100 p-5 space-y-3', className)}>
+    <div className={cn('bg-surface-1 rounded-xl border border-border-subtle p-5 space-y-3', className)}>
       <Skeleton className="h-4 w-24" />
       <Skeleton className="h-8 w-16" />
       <Skeleton className="h-3 w-32" />

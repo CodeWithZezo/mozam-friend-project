@@ -93,6 +93,25 @@ const CUSTOMERS_DATA = [
   { name: 'Nadia Iqbal',  phone: '03665554321', address: 'House 30, Model Town' },
 ]
 
+const RESERVATIONS_DATA: { name: string; email: string; phone: string; daysOffset: number; time: string; guests: number; status: 'pending' | 'confirmed' | 'cancelled'; notes?: string }[] = [
+  { name: 'Ahmed Khan',    email: 'ahmed.khan@example.com',    phone: '03001234567', daysOffset: -6, time: '19:00', guests: 4, status: 'confirmed', notes: 'Window seat if possible' },
+  { name: 'Sara Malik',    email: 'sara.malik@example.com',    phone: '03219876543', daysOffset: -3, time: '20:00', guests: 2, status: 'confirmed' },
+  { name: 'Usman Ali',     email: 'usman.ali@example.com',     phone: '03335556789', daysOffset: -1, time: '13:30', guests: 6, status: 'cancelled', notes: 'Family lunch, need high chairs' },
+  { name: 'Fatima Noor',   email: 'fatima.noor@example.com',   phone: '03124441234', daysOffset: 1,  time: '18:30', guests: 3, status: 'pending' },
+  { name: 'Bilal Hassan',  email: 'bilal.hassan@example.com',  phone: '03457778901', daysOffset: 2,  time: '21:00', guests: 5, status: 'pending', notes: 'Birthday celebration, requesting a cake table' },
+  { name: 'Zainab Raza',   email: 'zainab.raza@example.com',   phone: '03112223456', daysOffset: 3,  time: '19:30', guests: 2, status: 'confirmed' },
+  { name: 'Hamza Sheikh',  email: 'hamza.sheikh@example.com',  phone: '03228889012', daysOffset: 4,  time: '20:30', guests: 8, status: 'pending', notes: 'Office team dinner' },
+]
+
+const MESSAGES_DATA = [
+  { name: 'Ahmed Khan',   email: 'ahmed.khan@example.com',   message: 'Do you have any vegan options on the menu?' },
+  { name: 'Sara Malik',   email: 'sara.malik@example.com',   message: 'What are your opening hours on Sundays?' },
+  { name: 'Usman Ali',    email: 'usman.ali@example.com',    message: 'I had a great experience at your restaurant last week, thank you!' },
+  { name: 'Fatima Noor',  email: 'fatima.noor@example.com',  message: 'Do you offer catering services for large events?' },
+  { name: 'Bilal Hassan', email: 'bilal.hassan@example.com', message: 'My delivery order was missing an item, can someone follow up?' },
+  { name: 'Nadia Iqbal',  email: 'nadia.iqbal@example.com',  message: 'Can I get a discount for bulk office orders?' },
+]
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function pastDate(daysBack: number, hour: number): Date {
@@ -232,6 +251,13 @@ async function main() {
     const entry = vm.get(`${product}|${variant}`)
     if (!entry) throw new Error(`Variant not found: ${product}|${variant}`)
     return { variantId: entry.id, qty, price: entry.price }
+  }
+
+  // Shorthand: vNamed(product, variant) → { variantId, qty, price, productName, variantName }
+  const vNamed = (product: string, variant: string, qty = 1): OrderItem & { productName: string; variantName: string } => {
+    const entry = vm.get(`${product}|${variant}`)
+    if (!entry) throw new Error(`Variant not found: ${product}|${variant}`)
+    return { variantId: entry.id, qty, price: entry.price, productName: product, variantName: variant }
   }
 
   const C = (i: number) => customers[i].id  // customer ID by index
@@ -389,6 +415,94 @@ async function main() {
   const returnedCount  = 1
 
   console.log(`  ✓ ${orderCount} orders created (${completedCount} completed, ${pendingCount} pending, ${cancelledCount} cancelled, ${returnedCount} returned)`)
+
+  // ── Website Orders ─────────────────────────────────────────────────────────
+  const webOrderPlan: { customer: typeof CUSTOMERS_DATA[number]; orderType: 'dine_in' | 'takeaway' | 'delivery'; status: 'pending' | 'confirmed' | 'preparing' | 'completed' | 'cancelled'; items: (OrderItem & { productName: string; variantName: string })[]; daysBack: number; hour: number; notes?: string }[] = [
+    { customer: CUSTOMERS_DATA[0], orderType: 'delivery', status: 'completed',
+      items: [vNamed('Chicken Burger','Double',2), vNamed('French Fries','Medium',2), vNamed('Cold Drink','Regular (330ml)',2)],
+      daysBack: 6, hour: 19 },
+    { customer: CUSTOMERS_DATA[2], orderType: 'delivery', status: 'completed',
+      items: [vNamed('Pepperoni','Medium (10")'), vNamed('Garlic Bread','Regular'), vNamed('Cold Drink','Large (500ml)',2)],
+      daysBack: 4, hour: 20, notes: 'Leave at the gate' },
+    { customer: CUSTOMERS_DATA[4], orderType: 'takeaway', status: 'completed',
+      items: [vNamed('Zinger Burger','Regular',2), vNamed('Onion Rings','Regular'), vNamed('Tea','Regular',2)],
+      daysBack: 3, hour: 13 },
+    { customer: CUSTOMERS_DATA[6], orderType: 'delivery', status: 'preparing',
+      items: [vNamed('Hawaiian','Large (14")'), vNamed('Caesar Salad','Small'), vNamed('Cold Drink','Regular (330ml)',2)],
+      daysBack: 1, hour: 18, notes: 'Ring the bell twice' },
+    { customer: CUSTOMERS_DATA[8], orderType: 'delivery', status: 'confirmed',
+      items: [vNamed('Beef Wrap','Large',2), vNamed('French Fries','Small'), vNamed('Milkshake','Regular')],
+      daysBack: 0, hour: 12 },
+    { customer: CUSTOMERS_DATA[9], orderType: 'delivery', status: 'pending',
+      items: [vNamed('BBQ Burger','Regular'), vNamed('Coleslaw','Regular'), vNamed('Cold Drink','Large (500ml)')],
+      daysBack: 0, hour: 15, notes: 'Call on arrival' },
+    { customer: CUSTOMERS_DATA[1], orderType: 'delivery', status: 'cancelled',
+      items: [vNamed('Margherita','Small (7")'), vNamed('Cold Drink','Regular (330ml)')],
+      daysBack: 2, hour: 21 },
+  ]
+
+  for (const wo of webOrderPlan) {
+    const subtotal = wo.items.reduce((s, i) => s + i.price * i.qty, 0)
+    const deliveryFee = wo.orderType === 'delivery' ? 150 : 0
+    const total = subtotal + deliveryFee
+    await prisma.webOrder.create({
+      data: {
+        customerName: wo.customer.name,
+        customerPhone: wo.customer.phone,
+        customerEmail: `${wo.customer.name.toLowerCase().replace(/\s+/g, '.')}@example.com`,
+        address: wo.orderType === 'delivery' ? wo.customer.address : null,
+        orderType: wo.orderType,
+        status: wo.status,
+        subtotal,
+        deliveryFee,
+        total,
+        notes: wo.notes ?? null,
+        createdAt: pastDate(wo.daysBack, wo.hour),
+        items: {
+          create: wo.items.map((i) => ({
+            variantId: i.variantId,
+            productName: i.productName,
+            variantName: i.variantName,
+            quantity: i.qty,
+            unitPrice: i.price,
+            subtotal: i.price * i.qty,
+          })),
+        },
+      },
+    })
+  }
+  console.log(`  ✓ ${webOrderPlan.length} website orders created`)
+
+  // ── Reservations ───────────────────────────────────────────────────────────
+  for (const r of RESERVATIONS_DATA) {
+    const date = new Date()
+    date.setDate(date.getDate() + r.daysOffset)
+    date.setHours(0, 0, 0, 0)
+    // booked a few days before the reservation date (or "today" for past ones)
+    const createdDaysBack = r.daysOffset < 0 ? -r.daysOffset : 1
+    await prisma.reservation.create({
+      data: {
+        name: r.name,
+        email: r.email,
+        phone: r.phone,
+        date,
+        time: r.time,
+        guests: r.guests,
+        status: r.status,
+        notes: r.notes ?? null,
+        createdAt: pastDate(createdDaysBack, 10),
+      },
+    })
+  }
+  console.log(`  ✓ ${RESERVATIONS_DATA.length} reservations created`)
+
+  // ── Messages ───────────────────────────────────────────────────────────────
+  for (const [idx, m] of MESSAGES_DATA.entries()) {
+    await prisma.message.create({
+      data: { name: m.name, email: m.email, message: m.message, createdAt: pastDate(MESSAGES_DATA.length - idx, 9) },
+    })
+  }
+  console.log(`  ✓ ${MESSAGES_DATA.length} messages created`)
 
   console.log('\n✅ Seeding complete!')
   console.log('   Login:    admin / admin123')

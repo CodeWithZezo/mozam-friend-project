@@ -92,9 +92,9 @@ export default function InventoryPage() {
       <div className="p-6">
         <div className="flex justify-between items-center mb-6 gap-4">
           <div className="flex items-center gap-3">
-            <p className="text-sm text-gray-500">{stock.length} {stock.length === 1 ? 'item' : 'items'}</p>
+            <p className="text-sm text-text-muted">{stock.length} {stock.length === 1 ? 'item' : 'items'}</p>
             {lowStockCount > 0 && (
-              <span className="flex items-center gap-1 text-xs bg-red-100 text-red-600 px-2.5 py-1 rounded-full font-medium">
+              <span className="flex items-center gap-1 text-xs bg-red-400/15 text-red-400 px-2.5 py-1 rounded-full font-medium">
                 <AlertTriangle size={11} /> {lowStockCount} low stock
               </span>
             )}
@@ -131,13 +131,13 @@ export default function InventoryPage() {
               {stock.map(s => {
                 const isLow = Number(s.quantity) <= Number(s.minStock)
                 return (
-                  <TableRow key={s.id} className={isLow ? 'bg-red-50/40' : ''}>
-                    <TableCell className="font-medium text-gray-900">{s.name}</TableCell>
-                    <TableCell className={cn('font-semibold', isLow ? 'text-red-600' : 'text-gray-700')}>
+                  <TableRow key={s.id} className={isLow ? 'bg-red-400/5' : ''}>
+                    <TableCell className="font-medium text-text-primary">{s.name}</TableCell>
+                    <TableCell className={cn('font-semibold', isLow ? 'text-red-400' : 'text-text-secondary')}>
                       {Number(s.quantity).toLocaleString()}
                     </TableCell>
-                    <TableCell className="text-gray-500">{s.unit}</TableCell>
-                    <TableCell className="text-gray-500">{Number(s.minStock).toLocaleString()}</TableCell>
+                    <TableCell className="text-text-muted">{s.unit}</TableCell>
+                    <TableCell className="text-text-muted">{Number(s.minStock).toLocaleString()}</TableCell>
                     <TableCell>
                       {isLow ? (
                         <Badge variant="low">
@@ -152,38 +152,38 @@ export default function InventoryPage() {
                         {/* Primary stock actions */}
                         <Button size="sm" variant="ghost"
                           onClick={() => { setActionModal({ item: s, type: 'add' }); setActionQty(''); setActionNote('') }}
-                          className="text-green-700 hover:bg-green-50 hover:text-green-800"
+                          className="text-green-400 hover:bg-green-400/15 hover:text-green-300"
                         >
                           Add
                         </Button>
                         <Button size="sm" variant="ghost"
                           onClick={() => { setActionModal({ item: s, type: 'use' }); setActionQty(''); setActionNote('') }}
-                          className="text-red-600 hover:bg-red-50 hover:text-red-700"
+                          className="text-red-400 hover:bg-red-400/15 hover:text-red-300"
                         >
                           Use
                         </Button>
                         <Button size="sm" variant="ghost"
                           onClick={() => { setActionModal({ item: s, type: 'update' }); setActionQty(''); setActionNote('') }}
-                          className="text-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                          className="text-blue-400 hover:bg-blue-400/15 hover:text-blue-300"
                         >
                           Set
                         </Button>
 
                         {/* Divider */}
-                        <div className="w-px h-4 bg-gray-200 mx-0.5" aria-hidden="true" />
+                        <div className="w-px h-4 bg-border-subtle mx-0.5" aria-hidden="true" />
 
                         {/* Secondary actions */}
                         <Button size="sm" variant="ghost" icon
                           aria-label={`View history for ${s.name}`}
                           onClick={() => showHistory(s)}
-                          className="text-gray-500 hover:text-gray-700"
+                          className="text-text-muted hover:text-text-secondary"
                         >
                           <History size={14} />
                         </Button>
                         <Button size="sm" variant="ghost" icon
                           aria-label={`Delete ${s.name}`}
                           onClick={() => setDeleteTarget(s)}
-                          className="text-red-400 hover:text-red-600 hover:bg-red-50"
+                          className="text-red-400 hover:text-red-300 hover:bg-red-400/15"
                         >
                           <Trash2 size={14} />
                         </Button>
@@ -277,13 +277,13 @@ export default function InventoryPage() {
           {historyModal?.entries.length === 0 ? (
             <EmptyState icon={History} title="No history yet" description="Actions on this item will appear here." />
           ) : historyModal?.entries.map(e => (
-            <div key={e.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg text-sm">
+            <div key={e.id} className="flex items-center gap-3 p-3 bg-surface-2 rounded-lg text-sm">
               <Badge variant={actionBadgeVariant[e.action] ?? 'neutral'} className="shrink-0 capitalize">
                 {e.action}
               </Badge>
-              <span className="font-medium text-gray-700">{Number(e.quantity).toLocaleString()} {historyModal.item.unit}</span>
-              <span className="text-gray-500 flex-1 truncate">{e.note ?? ''}</span>
-              <span className="text-gray-400 text-xs shrink-0">{new Date(e.createdAt).toLocaleString()}</span>
+              <span className="font-medium text-text-secondary">{Number(e.quantity).toLocaleString()} {historyModal.item.unit}</span>
+              <span className="text-text-muted flex-1 truncate">{e.note ?? ''}</span>
+              <span className="text-text-muted text-xs shrink-0">{new Date(e.createdAt).toLocaleString()}</span>
             </div>
           ))}
         </div>

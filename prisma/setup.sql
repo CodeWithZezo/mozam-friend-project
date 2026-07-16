@@ -1,10 +1,10 @@
 -- ============================================
--- Alfredough POS System - Database Setup SQL
+-- Tymo POS System - Database Setup SQL
 -- Run this in phpMyAdmin or MySQL Workbench
 -- ============================================
 
-CREATE DATABASE IF NOT EXISTS alfredough_pos CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE alfredough_pos;
+CREATE DATABASE IF NOT EXISTS tymo_pos CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE tymo_pos;
 
 -- Admins
 CREATE TABLE admins (

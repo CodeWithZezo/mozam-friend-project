@@ -7,7 +7,7 @@ function ShellInner({ children }: { children: React.ReactNode }) {
   const { isOpen, close } = useSidebar()
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-surface-0">
       {/* Mobile backdrop */}
       {isOpen && (
         <div

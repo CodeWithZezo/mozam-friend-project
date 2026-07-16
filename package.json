@@ -1,11 +1,10 @@
 {
-  "name": "alfredough-pos",
+  "name": "tymo-pos",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && prisma migrate deploy && next build",
-    "postbuild": "npm run seed",
+    "build": "prisma generate && prisma migrate deploy && next build && npm run seed",
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx prisma/seed.ts"

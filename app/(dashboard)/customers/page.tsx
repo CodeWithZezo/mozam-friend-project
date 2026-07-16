@@ -121,9 +121,9 @@ export default function CustomersPage() {
             <TableBody>
               {customers.map(c => (
                 <TableRow key={c.id}>
-                  <TableCell className="font-medium text-gray-900">{c.name}</TableCell>
-                  <TableCell className="text-gray-600">{c.phone}</TableCell>
-                  <TableCell className="text-gray-500 max-w-50 truncate">{c.address ?? '—'}</TableCell>
+                  <TableCell className="font-medium text-text-primary">{c.name}</TableCell>
+                  <TableCell className="text-text-secondary">{c.phone}</TableCell>
+                  <TableCell className="text-text-muted max-w-50 truncate">{c.address ?? '—'}</TableCell>
                   <TableCell>
                     <Badge variant="neutral">{c._count.orders} orders</Badge>
                   </TableCell>
@@ -133,7 +133,7 @@ export default function CustomersPage() {
                         variant="ghost" size="sm" icon
                         aria-label={`Edit ${c.name}`}
                         onClick={() => openEdit(c)}
-                        className="text-blue-500 hover:text-blue-700 hover:bg-blue-50"
+                        className="text-blue-400 hover:text-blue-300 hover:bg-blue-400/15"
                       >
                         <Pencil size={14} />
                       </Button>
@@ -141,7 +141,7 @@ export default function CustomersPage() {
                         variant="ghost" size="sm" icon
                         aria-label={`Delete ${c.name}`}
                         onClick={() => setDeleteTarget(c)}
-                        className="text-red-400 hover:text-red-600 hover:bg-red-50"
+                        className="text-red-400 hover:text-red-300 hover:bg-red-400/15"
                       >
                         <Trash2 size={14} />
                       </Button>

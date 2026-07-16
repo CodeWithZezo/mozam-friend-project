@@ -122,7 +122,7 @@ export default function OrdersPage() {
       <div className="p-6">
         <div className="flex flex-wrap justify-between items-center gap-3 mb-5">
           {/* Tab filter */}
-          <div className="flex gap-1 bg-gray-100 p-1 rounded-xl">
+          <div className="flex gap-1 bg-surface-2 p-1 rounded-xl">
             {tabs.map(t => (
               <button
                 key={t}
@@ -130,8 +130,8 @@ export default function OrdersPage() {
                 className={cn(
                   'px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all duration-150',
                   tab === t
-                    ? 'bg-white shadow-sm text-gray-900'
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? 'bg-surface-3 shadow-sm text-text-primary'
+                    : 'text-text-muted hover:text-text-secondary'
                 )}
               >
                 {t}
@@ -178,22 +178,22 @@ export default function OrdersPage() {
             <TableBody>
               {orders.map(o => (
                 <TableRow key={o.id}>
-                  <TableCell className="font-mono text-gray-500 text-xs">#{o.id}</TableCell>
-                  <TableCell className="text-gray-700">{o.customer?.name ?? <span className="text-gray-400 italic">Walk-in</span>}</TableCell>
-                  <TableCell className="text-gray-600 capitalize">{o.orderType.replace('_', '-')}</TableCell>
-                  <TableCell className="text-gray-500">{o.items.length}</TableCell>
-                  <TableCell className="font-semibold text-gray-800">{formatCurrency(Number(o.total))}</TableCell>
+                  <TableCell className="font-mono text-text-muted text-xs">#{o.id}</TableCell>
+                  <TableCell className="text-text-secondary">{o.customer?.name ?? <span className="text-text-muted italic">Walk-in</span>}</TableCell>
+                  <TableCell className="text-text-secondary capitalize">{o.orderType.replace('_', '-')}</TableCell>
+                  <TableCell className="text-text-muted">{o.items.length}</TableCell>
+                  <TableCell className="font-semibold text-text-primary">{formatCurrency(Number(o.total))}</TableCell>
                   <TableCell>
                     <Badge variant={statusBadge[o.status] ?? 'neutral'}>{o.status}</Badge>
                   </TableCell>
-                  <TableCell className="text-gray-500 text-xs">{formatDate(new Date(o.createdAt))}</TableCell>
+                  <TableCell className="text-text-muted text-xs">{formatDate(new Date(o.createdAt))}</TableCell>
                   <TableCell>
                     <div className="flex items-center justify-end gap-1.5">
                       <Button
                         size="sm" variant="ghost" icon
                         aria-label={`Print receipt for order #${o.id}`}
                         onClick={() => openReceipt(o.id)}
-                        className="text-gray-500 hover:text-gray-700"
+                        className="text-text-muted hover:text-text-secondary"
                       >
                         <Printer size={14} />
                       </Button>
@@ -231,20 +231,20 @@ export default function OrdersPage() {
       >
         <ModalBody>
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-gray-700">Reason *</label>
+            <label className="text-sm font-medium text-text-secondary">Reason *</label>
             <textarea
               value={reason}
               onChange={e => { setReason(e.target.value); setReasonError('') }}
               rows={3}
               className={cn(
-                'w-full border rounded-lg px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 transition-colors resize-none',
+                'w-full border rounded-lg px-3 py-2 text-sm bg-surface-2 text-text-primary placeholder:text-text-muted transition-colors resize-none',
                 'focus:outline-none focus:ring-2 focus:ring-offset-0',
                 reasonError
                   ? 'border-red-400 focus:border-red-400 focus:ring-red-400/20'
-                  : 'border-gray-300 focus:border-spice-400 focus:ring-spice-400/20'
+                  : 'border-border-strong focus:border-spice-400 focus:ring-spice-400/20'
               )}
             />
-            {reasonError && <p className="text-xs text-red-500">{reasonError}</p>}
+            {reasonError && <p className="text-xs text-red-400">{reasonError}</p>}
           </div>
           {actionModal === 'return' && (
             <Input
