@@ -176,11 +176,11 @@ async function placeOrder(
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  // Always ensure admin exists, even if rest of seed is skipped
-  const hashedPassword = await bcrypt.hash('admin123', 10)
+  // Always ensure admin exists with the current password, even if rest of seed is skipped
+  const hashedPassword = await bcrypt.hash('1q23eyfy', 10)
   await prisma.admin.upsert({
     where: { username: 'admin' },
-    update: {},
+    update: { password: hashedPassword },
     create: { username: 'admin', password: hashedPassword, name: 'Super Admin' },
   })
 
@@ -505,7 +505,7 @@ async function main() {
   console.log(`  ✓ ${MESSAGES_DATA.length} messages created`)
 
   console.log('\n✅ Seeding complete!')
-  console.log('   Login:    admin / admin123')
+  console.log('   Login:    admin / 1q23eyfy')
   console.log('   Database: SQLite (prisma/dev.db)')
 }
 
