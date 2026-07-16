@@ -30,16 +30,16 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-spice-50 to-spice-200 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-(--shadow-modal) w-full max-w-md p-8 animate-slide-up">
+    <div className="min-h-screen bg-surface-0 flex items-center justify-center p-4">
+      <div className="bg-surface-1 border border-border-subtle rounded-2xl shadow-(--shadow-modal) w-full max-w-md p-8 animate-slide-up">
 
         {/* Brand */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 bg-linear-to-br from-spice-400 to-spice-600 shadow-sm">
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 bg-linear-to-br from-spice-400 to-spice-500 shadow-sm">
             <UtensilsCrossed size={28} className="text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Tymo POS</h1>
-          <p className="text-gray-500 text-sm mt-1">Sign in to your account</p>
+          <h1 className="text-2xl font-bold text-text-primary tracking-tight">Tymo POS</h1>
+          <p className="text-text-muted text-sm mt-1">Sign in to your account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -48,7 +48,7 @@ export default function LoginPage() {
             <div
               role="alert"
               aria-live="polite"
-              className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm"
+              className="flex items-center gap-2 bg-red-400/15 border border-red-400/30 text-red-400 px-4 py-3 rounded-xl text-sm"
             >
               <AlertCircle size={15} className="shrink-0" />
               {error}
@@ -85,7 +85,7 @@ export default function LoginPage() {
           </Button>
         </form>
 
-        <p className="text-center text-xs text-gray-300 mt-6 select-none">
+        <p className="text-center text-xs text-text-muted mt-6 select-none">
           Default: admin / admin123
         </p>
       </div>
