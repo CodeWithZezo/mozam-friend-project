@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
-    "db:migrate": "prisma migrate deploy && npm run seed",
+    "build": "prisma generate && npm run fix-engine-perms && prisma migrate deploy && next build && npm run seed",
+    "fix-engine-perms": "node scripts/fix-engine-perms.js",
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx prisma/seed.ts"
